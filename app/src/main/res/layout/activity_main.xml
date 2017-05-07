@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="4dp">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.bittu.reminderapp.MainActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+
+        <include
+            android:id="@+id/cardview1"
+            layout="@layout/carview1"/>
+
+
+        <include
+            android:id="@+id/cardview2"
+            layout="@layout/carview2"/>
+
+        <include
+            android:id="@+id/cardview3"
+            layout="@layout/cardview3"/>
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

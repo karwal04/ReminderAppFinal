@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:minHeight="?attr/actionBarSize"
+    android:background="@drawable/gradient"
+    android:elevation="5dp"
+    android:theme="@style/Mytoolbar"
+    android:popupTheme="@style/Mypopup"
+    android:outlineProvider="bounds"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+</android.support.v7.widget.Toolbar>
