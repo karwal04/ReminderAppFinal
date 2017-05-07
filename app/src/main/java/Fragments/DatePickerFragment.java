@@ -1,10 +1,12 @@
-package com.example.bittu.reminderapp;
+package Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import com.example.bittu.reminderapp.BirthdayReminderActivity;
 
 import java.util.Calendar;
 

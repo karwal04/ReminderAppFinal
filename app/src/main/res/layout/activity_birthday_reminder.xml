@@ -129,7 +129,8 @@
             android:layout_marginTop="30dp"
             android:theme="@style/MyButton"
             android:elevation="4dp"
-            android:text="SUBMIT"/>
+            android:text="SUBMIT"
+            android:onClick="add_reminder"/>
 
 
     </RelativeLayout>

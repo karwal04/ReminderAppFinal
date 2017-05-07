@@ -5,10 +5,10 @@ package Models;
  */
 
 public class ReminderRecord {
-
+    private  int _id;
     private String Name;
     private String Date;
-    private String time;
+    private boolean vibrate;
     private int Priority;
 
 
@@ -40,19 +40,27 @@ public class ReminderRecord {
         Date = date;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public int getPriority() {
         return Priority;
     }
 
     public void setPriority(int priority) {
         Priority = priority;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
+
+    public boolean isVibrate() {
+        return vibrate;
+    }
+
+    public void setVibrate(boolean vibrate) {
+        this.vibrate = vibrate;
     }
 }
