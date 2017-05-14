@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,20 +53,17 @@ public class UserAdaptor extends CursorAdapter {
         // Lookup view for data population
         TextView Name = (TextView) view.findViewById(R.id.name);
         TextView date = (TextView) view.findViewById(R.id.dateofbirth);
-        TextView priority = (TextView) view.findViewById(R.id.Prio);
-        Button del_btn=(Button)view.findViewById(R.id.delete_btn);
-        Button edit_btn=(Button)view.findViewById(R.id.edit_btn);
+        ImageView del_btn=(ImageView) view.findViewById(R.id.delete_btn);
+        ImageView edit_btn=(ImageView)view.findViewById(R.id.edit_btn);
 
 
 
         // Populate the data into the template view using the data object
         name=cursor.getString(cursor.getColumnIndexOrThrow("name"));
         String date_data=cursor.getString(cursor.getColumnIndexOrThrow("date"));
-        String prio=cursor.getString(cursor.getColumnIndexOrThrow("priority"));
 
         Name.setText(name);
         date.setText(date_data);
-        priority.setText(prio);
         // Return the completed view to render on screen
 
 

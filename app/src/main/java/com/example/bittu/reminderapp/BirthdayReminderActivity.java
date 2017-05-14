@@ -45,10 +45,6 @@ public class BirthdayReminderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
-
-
-
         handler=new DatabaseHandler(getApplicationContext());
 
 
