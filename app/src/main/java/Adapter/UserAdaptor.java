@@ -53,6 +53,7 @@ public class UserAdaptor extends CursorAdapter {
         // Lookup view for data population
         TextView Name = (TextView) view.findViewById(R.id.name);
         TextView date = (TextView) view.findViewById(R.id.dateofbirth);
+        TextView id=(TextView)view.findViewById(R.id.id);
         ImageView del_btn=(ImageView) view.findViewById(R.id.delete_btn);
         ImageView edit_btn=(ImageView)view.findViewById(R.id.edit_btn);
 
@@ -61,9 +62,11 @@ public class UserAdaptor extends CursorAdapter {
         // Populate the data into the template view using the data object
         name=cursor.getString(cursor.getColumnIndexOrThrow("name"));
         String date_data=cursor.getString(cursor.getColumnIndexOrThrow("date"));
+        String id_data=cursor.getString(cursor.getColumnIndexOrThrow("_id"));
 
         Name.setText(name);
         date.setText(date_data);
+        id.setText(id_data);
         // Return the completed view to render on screen
 
 
@@ -73,7 +76,7 @@ public class UserAdaptor extends CursorAdapter {
             public void onClick(View view) {
 
                 RelativeLayout vwParentRow = (RelativeLayout)view.getParent();
-                TextView child = (TextView)vwParentRow.getChildAt(0);
+                TextView child = (TextView)vwParentRow.getChildAt(1);
 
 
                 handler.deleteContact(child.getText().toString());
@@ -89,12 +92,12 @@ public class UserAdaptor extends CursorAdapter {
             @Override
             public void onClick(View view) {
                 RelativeLayout vwParentRow = (RelativeLayout)view.getParent();
-                TextView Name = (TextView) vwParentRow.getChildAt(0);
+                TextView Name = (TextView) vwParentRow.getChildAt(1);
 
 
 
                 Intent intent=new Intent(context,BirthdayReminderActivity.class);
-                intent.putExtra("name",Name.getText().toString());
+                intent.putExtra("id",Name.getText().toString());
                 intent.putExtra("Update",1);
 
                 view.getContext().startActivity(intent);

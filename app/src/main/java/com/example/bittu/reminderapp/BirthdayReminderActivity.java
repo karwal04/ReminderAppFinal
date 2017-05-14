@@ -77,11 +77,11 @@ public class BirthdayReminderActivity extends AppCompatActivity {
         });
 
 
-        if(getIntent().hasExtra("name")){
-            String IntentName=getIntent().getExtras().getString("name");
+        if(getIntent().hasExtra("id")){
+            String IntentId=getIntent().getExtras().getString("id");
 
 
-            ReminderRecord ct=handler.getReminder(IntentName);
+            ReminderRecord ct=handler.getReminder(IntentId);
 
 
             id=ct.get_id();
@@ -103,7 +103,7 @@ public class BirthdayReminderActivity extends AppCompatActivity {
         rec.setVibrate(mSwitchCompat.isChecked());
         rec.setPriority(progressChangedValue);
 
-        if(getIntent().hasExtra("name")) {
+        if(getIntent().hasExtra("id")) {
             handler.updateContact(rec);
             finish();
 
@@ -124,6 +124,7 @@ public class BirthdayReminderActivity extends AppCompatActivity {
     {
 
         String[] date_format=date.getText().toString().split("/");
+
         int month=Integer.parseInt(date_format[1]);
         int day=Integer.parseInt(date_format[0]);
 
@@ -131,7 +132,7 @@ public class BirthdayReminderActivity extends AppCompatActivity {
 
         Calendar myAlarmDate = Calendar.getInstance();
         myAlarmDate.setTimeInMillis(System.currentTimeMillis());
-        myAlarmDate.set(2017, month, day, 10, 26, 0);
+        myAlarmDate.set(2017, month, day, 17, 20, 0);
 
         Intent alertIntent=new Intent(this, AlertReceiver.class);
 
@@ -150,6 +151,8 @@ public class BirthdayReminderActivity extends AppCompatActivity {
     public void date_picker(View view){
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+
+
     }
 
 

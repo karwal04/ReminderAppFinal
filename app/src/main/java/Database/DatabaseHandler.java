@@ -91,12 +91,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting single ReminderRecord
-    public ReminderRecord getReminder(String name) {
+    public ReminderRecord getReminder(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_REMINDER, new String[] { KEY_ID,
-                        KEY_NAME,KEY_DATE,KEY_VIBRATE,KEY_PRIORITY}, KEY_NAME + "=?",
-                new String[] { name }, null, null, null, null);
+                        KEY_NAME,KEY_DATE,KEY_VIBRATE,KEY_PRIORITY}, KEY_ID+ "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -126,10 +126,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //delete single record
 
-    public void deleteContact(String name) {
+    public void deleteContact(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_REMINDER, KEY_NAME + " = ?",
-                new String[] {name});
+        db.delete(TABLE_REMINDER, KEY_ID + " = ?",
+                new String[] {String.valueOf(id)});
         db.close();
     }
 
