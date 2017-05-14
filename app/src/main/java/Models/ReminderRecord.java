@@ -8,11 +8,11 @@ public class ReminderRecord {
     private  int _id;
     private String Name;
     private String Date;
-    private boolean vibrate;
+    private int vibrate;
     private int Priority;
 
 
-    public ReminderRecord(int id,String name,String date,boolean vibrate,int priority){
+    public ReminderRecord(int id,String name,String date,int vibrate,int priority){
         this._id=id;
         this.Name=name;
         this.Date=date;
@@ -58,11 +58,11 @@ public class ReminderRecord {
         this._id = _id;
     }
 
-    public boolean isVibrate() {
+    public int isVibrate() {
         return vibrate;
     }
 
-    public void setVibrate(boolean vibrate) {
+    public void setVibrate(int vibrate) {
         this.vibrate = vibrate;
     }
 }

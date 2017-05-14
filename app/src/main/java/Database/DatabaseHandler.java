@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,9 +101,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
+
+
+
         ReminderRecord rec = new ReminderRecord(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2),Boolean.valueOf(cursor.getString(3)),Integer.parseInt(cursor.getString(4)));
+                cursor.getString(1), cursor.getString(2),cursor.getInt(3),Integer.parseInt(cursor.getString(4)));
         // return contact
+        String jj="0";
+
+        Log.v("BOOOOOOOLLLEAANNN",String.valueOf(Boolean.valueOf(jj)));
         return rec;
     }
 

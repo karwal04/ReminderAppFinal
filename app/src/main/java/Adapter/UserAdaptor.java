@@ -92,7 +92,7 @@ public class UserAdaptor extends CursorAdapter {
             @Override
             public void onClick(View view) {
                 RelativeLayout vwParentRow = (RelativeLayout)view.getParent();
-                TextView Name = (TextView) vwParentRow.getChildAt(1);
+                TextView Name = (TextView) vwParentRow.getChildAt(1);             //Id is passed
 
 
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class BirthdayReminderActivity extends AppCompatActivity {
     public SeekBar seek;
     int progressChangedValue;
     SwitchCompat mSwitchCompat;
+    int bholder;
     int id;
 
 
@@ -58,6 +60,14 @@ public class BirthdayReminderActivity extends AppCompatActivity {
         seek=(SeekBar)findViewById(R.id.seekbar);
         mSwitchCompat=(SwitchCompat)findViewById(R.id.switchCompat);
 
+        mSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                bholder=b?1:0;
+                Toast.makeText(BirthdayReminderActivity.this,String.valueOf(bholder),Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -82,13 +92,14 @@ public class BirthdayReminderActivity extends AppCompatActivity {
 
 
             ReminderRecord ct=handler.getReminder(IntentId);
-
+            Toast.makeText(BirthdayReminderActivity.this,String.valueOf(ct.isVibrate()),Toast.LENGTH_SHORT).show();
 
             id=ct.get_id();
             name.setText(ct.getName());
             date.setText(ct.getDate());
-            mSwitchCompat.setChecked(ct.isVibrate());
+            mSwitchCompat.setChecked(ct.isVibrate()==1?true:false);
             seek.setProgress(ct.getPriority());
+
         }
 
     }
@@ -100,7 +111,7 @@ public class BirthdayReminderActivity extends AppCompatActivity {
         rec.set_id(id);
         rec.setName(name.getText().toString());
         rec.setDate(date.getText().toString());
-        rec.setVibrate(mSwitchCompat.isChecked());
+        rec.setVibrate(bholder);
         rec.setPriority(progressChangedValue);
 
         if(getIntent().hasExtra("id")) {
@@ -111,6 +122,7 @@ public class BirthdayReminderActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
+
             handler.addReminder(rec);
             finish();
         }
