@@ -24,7 +24,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ReminderApp";
 
     // ReminderRecords table name
-    private static final String TABLE_REMINDER = "Birthdays";
+    private static final String TABLE_REMINDER = "Test2";
 
     // ReminderRecords Table Columns name
     private static final String KEY_ID = "_id";
@@ -37,11 +37,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public DatabaseHandler(Context context){
 
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
+
         
     }
 
     String CREATE_ReminderRecordS_TABLE = "CREATE TABLE " + TABLE_REMINDER + "("
-            + KEY_ID + " INTEGER,"
+            + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_NAME + " TEXT,"
             + KEY_DATE + " TEXT,"
             + KEY_VIBRATE + " INTEGER,"
@@ -79,7 +80,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID,rem.get_id());
         values.put(KEY_NAME, rem.getName()); // ReminderRecord Name
         values.put(KEY_DATE, rem.getDate());
         values.put(KEY_VIBRATE,rem.isVibrate());
@@ -91,6 +91,54 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting single ReminderRecord
+    public ReminderRecord getReminder(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_REMINDER, new String[] { KEY_ID,
+                        KEY_NAME,KEY_DATE,KEY_VIBRATE,KEY_PRIORITY}, KEY_NAME + "=?",
+                new String[] { name }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        ReminderRecord rec = new ReminderRecord(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2),Boolean.valueOf(cursor.getString(3)),Integer.parseInt(cursor.getString(4)));
+        // return contact
+        return rec;
+    }
+
+
+    //updating single record
+
+    public int updateContact(ReminderRecord contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, contact.getName());
+        values.put(KEY_DATE,contact.getDate());
+        values.put(KEY_VIBRATE,contact.isVibrate());
+        values.put(KEY_PRIORITY,contact.getPriority());
+
+        // updating row
+        return db.update(TABLE_REMINDER, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(contact.get_id()) });
+    }
+
+
+    //delete single record
+
+    public void deleteContact(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_REMINDER, KEY_NAME + " = ?",
+                new String[] {name});
+        db.close();
+    }
+
+
+
+
+
+
+
 
 
     // Getting All ReminderRecords

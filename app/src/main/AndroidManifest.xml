@@ -17,11 +17,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".BirthdayReminderActivity">
+        <activity android:name=".BirthdayReminderActivity"
+                  android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".SavedReminderActivity">
+        <activity android:name=".SavedReminderActivity"
+                  android:noHistory="true"
+                  android:parentActivityName=".MainActivity">
+
         </activity>
+
         <receiver android:name="alarmManager.AlertReceiver"/>
+
     </application>
 
 </manifest>

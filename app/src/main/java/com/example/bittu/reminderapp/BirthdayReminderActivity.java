@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -27,6 +28,8 @@ public class BirthdayReminderActivity extends AppCompatActivity {
     public SeekBar seek;
     int progressChangedValue;
     SwitchCompat mSwitchCompat;
+    int id;
+
 
     DatabaseHandler handler;
 
@@ -36,9 +39,23 @@ public class BirthdayReminderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_birthday_reminder);
 
+        Toolbar mtoolbar=(Toolbar)findViewById(R.id.toolbar);                                   //Toolbar
+        mtoolbar.setTitle("Birthday Reminder");
+        setSupportActionBar(mtoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
 
 
         handler=new DatabaseHandler(getApplicationContext());
+
+
+
+
+
+
 
         name=(EditText)findViewById(R.id.name);
         date=(EditText)findViewById(R.id.date_picker);
@@ -63,20 +80,46 @@ public class BirthdayReminderActivity extends AppCompatActivity {
             }
         });
 
+
+        if(getIntent().hasExtra("name")){
+            String IntentName=getIntent().getExtras().getString("name");
+
+
+            ReminderRecord ct=handler.getReminder(IntentName);
+
+
+            id=ct.get_id();
+            name.setText(ct.getName());
+            date.setText(ct.getDate());
+            mSwitchCompat.setChecked(ct.isVibrate());
+            seek.setProgress(ct.getPriority());
+        }
+
     }
 
 
 
-    public void add_reminder(View view){
+    public void add_reminder(View view){                //OnClick method
         ReminderRecord rec=new ReminderRecord();
+        rec.set_id(id);
         rec.setName(name.getText().toString());
         rec.setDate(date.getText().toString());
         rec.setVibrate(mSwitchCompat.isChecked());
         rec.setPriority(progressChangedValue);
-        handler.addReminder(rec);
+
+        if(getIntent().hasExtra("name")) {
+            handler.updateContact(rec);
+            finish();
+
+            Intent intent=new Intent(BirthdayReminderActivity.this,SavedReminderActivity.class);
+            startActivity(intent);
+        }
+        else {
+            handler.addReminder(rec);
+            finish();
+        }
+
         setAlarm();
-
-
 
 
     }
@@ -92,7 +135,7 @@ public class BirthdayReminderActivity extends AppCompatActivity {
 
         Calendar myAlarmDate = Calendar.getInstance();
         myAlarmDate.setTimeInMillis(System.currentTimeMillis());
-        myAlarmDate.set(2017, month, day, 13, 32, 0);
+        myAlarmDate.set(2017, month, day, 10, 26, 0);
 
         Intent alertIntent=new Intent(this, AlertReceiver.class);
 

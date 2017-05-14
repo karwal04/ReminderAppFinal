@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
                                                                                                 //Toolbar Menu Innflation and onClick function
         mtoolbar.inflateMenu(R.menu.menu_main);
         mtoolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

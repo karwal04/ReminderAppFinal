@@ -12,9 +12,11 @@ public class ReminderRecord {
     private int Priority;
 
 
-    public ReminderRecord(String name,String date,String time,int priority){
+    public ReminderRecord(int id,String name,String date,boolean vibrate,int priority){
+        this._id=id;
         this.Name=name;
         this.Date=date;
+        this.vibrate=vibrate;
         this.Priority=priority;
     }
 
